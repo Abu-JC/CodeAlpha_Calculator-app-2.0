@@ -17,12 +17,29 @@ buttons.forEach(button => {
                 display.innerText = '0';
             }
         } 
+        // 3. Equals Execution
         else if (buttonText === '=') {
-            console.log("Calculation Logic");
+            if (operators.includes(lastChar)) {
+                return;
+            }
+            try {
+                let equation = currentText;
+                equation = equation.replaceAll('X', '*');
+                equation = equation.replaceAll('÷', '/');
+                
+                let result = eval(equation);
+                
+                if (typeof result === 'number' && !Number.isInteger(result)) {
+                    result = parseFloat(result.toFixed(5));
+                }
+                display.innerText = String(result);
+            }
+            catch (error) {
+                display.innerText = "Error";
+            }
         } 
-        // 4. Operator Button Tapped
+        // 4. Operator Checks
         else if (operators.includes(buttonText)) {
-            // Rule A: If screen is '0', only allow the minus symbol
             if (currentText === '0') {
                 if (buttonText === '-') {
                     display.innerText = buttonText;
@@ -33,6 +50,30 @@ buttons.forEach(button => {
             }
             else {
                 display.innerText += buttonText;
+            }
+        }
+        else if (buttonText === '()') {
+            let openCount = 0;
+            let closeCount = 0;
+            for (let char of currentText) {
+                if (char === '(') {
+                    openCount++;
+                } else if (char === ')') {
+                    closeCount++;
+                }
+            }
+            if (currentText === '0') {
+                display.innerText = '(';
+            }
+            else if (openCount > closeCount && !operators.includes(lastChar) && lastChar !== '(') {
+                display.innerText += ')';
+            }
+            else {
+                if (!operators.includes(lastChar) && lastChar !== '(') {
+                    display.innerText += 'X(';
+                } else {
+                    display.innerText += '(';
+                }
             }
         }
         else {
