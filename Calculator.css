@@ -50,7 +50,7 @@ body{
 }
 .btn:active{
     background-color: #e0e0e0;
-    border: 1px solid #08cf5b;
+    border: 1px solid #4bcc8160;
 }
 .calc-btns button:nth-child(4n) {
   background-color: #e5e5e5;
@@ -59,13 +59,13 @@ body{
   color: #f14141; 
 }
 .calc-btns button:nth-child(1):active{
-  border: 1px solid #e77b7b;
+  border: 1px solid #e77b7b9d;
 }
 .backspace-btn{
     color: #f14141;
 }
 .backspace-btn:active{
-  border: 1px solid rgb(233, 47, 47);
+  border: 1px solid rgba(233, 47, 47, 0.623);
 }
 .backspace-btn .material-icons {
   font-size: 26px;
